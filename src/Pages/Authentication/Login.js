@@ -37,7 +37,7 @@ export default function Login(){
             <h2 class="mt-1 mb-2 flex-align-center">Login</h2>
             <form class="form" onSubmit={loginHandler}>
                 <div class="input-with-icons">
-                    <i class="bi bi-person-fill input-icon"></i>
+                    <i class="bi bi-envelope-fill input-icon"></i>
                     <input 
                         type="email" 
                         placeholder="Enter your Email"
@@ -66,19 +66,20 @@ export default function Login(){
                     type="checkbox" 
                     id="checkbox"
                     />
-                    
                     <span class="pd--5">
-                        Remember me</span></div>
-                        <button class="btn-link-primary h6">Forgot your password?</button>
+                        Remember me
+                    </span>
+                </div>
+                    <button class="btn-link-primary h6">Forgot your password?</button>
             </div>
             <div className="flex-col gap-1">
             <div class="mt-1">
-                <button class="btn btn-gradient-pink width-100"
+                <button class="btn btn-gradient-blue width-100"
                  type="submit"   >
                     Login
                 </button>
             </div>
-                <button class="btn btn-gradient-pink width-100"
+                <button class="btn btn-gradient-blue width-100"
                    onClick={()=>handleLoginData(
                        test.email, test.password
                    )} 
@@ -88,7 +89,8 @@ export default function Login(){
             </div>
             <div class="flex-align-center">
                 <Link to="/signup">
-                    <button class="btn-link-gray m-1">Create new account</button></Link>
+                    <button class="btn-link-gray m-1">Create new account</button>
+                </Link>
             </div>
         </form>       
         
