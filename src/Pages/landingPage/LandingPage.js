@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import './LandingPage.css'
 export const LangingPage  = () =>{
+    
     return(
         <div className='container-section'>
             <div className='text-container'>

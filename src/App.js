@@ -8,11 +8,10 @@ function App() {
   return (
     <div className="App">
       <Routes>
-      <Route path="/" element={<LangingPage/>} />
-      <Route path="signup" element={<SignUp />} />
-      <Route path="mock" element={<Mockman />} />
-
-      <Route path="login" element={<Login />} />
+        <Route path="/" element={<LangingPage/>} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="mock" element={<Mockman />} />
+        <Route path="login" element={<Login />} />
       </Routes>
     </div>
   );
