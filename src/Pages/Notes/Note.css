@@ -1,0 +1,87 @@
+.note-container{
+    background-color: rgb(255, 255, 255);
+    width: 450px;
+    height: max-content;
+    padding: 1rem;
+    margin-top: 3rem;
+
+}
+.main-content{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+}
+.title-section{
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+}
+.body-section{
+    border: none;
+    width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-size: 1rem;
+    border: none;
+    min-height:auto;
+}
+/* input{
+    border: none;
+    width: 400px;
+} */
+.info-section{
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    color: var(--primary-color);
+}
+.info-date{
+    font-size: 1rem;
+}
+
+.info-icons{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+   
+}
+.info-icons .bi{
+    font-size: 1rem;
+}
+.notes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.note{
+    width: 450px;
+    background-color: rgb(254, 254, 254);
+    padding:1rem ;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    flex-direction: column;
+}
+.note-body{
+    margin: 1rem 0rem 1rem 0rem ;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.note-icons .bi{
+    font-size: 14px;
+    color: var(--primary-color);
+    padding: 0rem 0rem 0rem 1rem;
+
+}
+.note-icons{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+
+}
