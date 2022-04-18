@@ -3,6 +3,9 @@ import { createContext, useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import { useReducer } from 'react';
+import { filterReducer } from '../Reducer/FilterReducer';
+import { Navigate, useNavigate } from 'react-router-dom';
 const NoteContext = createContext()
 
 const useNote = () => useContext(NoteContext)
@@ -13,7 +16,9 @@ const initialState = {
     priority:"",
 }
 const NoteProvider = ({children}) =>{
-    const [note, setNote] = useState(initialState)
+    const [note, setNote] = useState(initialState);
+    const [noteStyle , setNoteStyle] = useState("none")
+    const [editNoteForm , setEditNoteForm] = useState({display:'none',note:""})
     const [archive, setArchive] = useState([])
     const token = localStorage.getItem("token")
     useEffect(()=>{
@@ -49,7 +54,7 @@ const NoteProvider = ({children}) =>{
                     authorization : token
             },
             })
-            console.log("Added:",res.data.notes)
+            setNoteStyle("none")
             setNote(res.data.notes)
         }
         catch(err){
@@ -83,8 +88,8 @@ const NoteProvider = ({children}) =>{
                 }
             }
             )
-            console.log("update:",res.data.notes)
             setNote(res.data.notes)
+            setEditNoteForm({display:'none',note:""})
         }
         catch(err){
             console.log(err)
@@ -138,25 +143,29 @@ const NoteProvider = ({children}) =>{
         }
     }
     const restoreArchive = async(note) =>{
-        try{
-            const res = await axios.post(`/api/archives/restore/${note._id}}`, 
-            {},
-            {
-                headers:{
-                    authorization : token
-                }
-            })
-            setNote(res.data.notes)
-            setArchive(res.data.archives)
-        }
-        catch(err){
-            console.log(err)
-        }
+        try {
+            const   response = await axios({
+                   method: 'post',
+                   url: `/api/archives/restore/${note._id}`,
+                   headers: {
+                       authorization: localStorage.getItem('token'),
+                   }
+               })
+
+               setArchive(response.data.archives)
+               setNote(response.data.notes)
+           }
+           catch(err)
+           {
+              
+           }
     }
     
-
+    const [state,dispatch] = useReducer(filterReducer, {
+        rating:""
+    })
     return(
-        <NoteContext.Provider value={{note,  setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive}}>
+        <NoteContext.Provider value={{note,  noteStyle,setNoteStyle, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive, state,dispatch,editNoteForm,setEditNoteForm}}>
             {children}
         </NoteContext.Provider>
     )

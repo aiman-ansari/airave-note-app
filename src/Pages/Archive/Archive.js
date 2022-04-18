@@ -1,12 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { useNote } from "../../Context/NoteContext"
 import { Header } from "../../Pages/HomePage/Header"
 import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
 import './Archive.css'
 export const ArchivePage = () =>{
-    const {archive, restoreArchive, addNote, deleteArchive} = useNote()
-    console.log("getting archieves:",archive)
+    const {archive, restoreArchive, deleteArchive} = useNote()
+    
     return(
         <div>
             <Header />
@@ -16,7 +15,8 @@ export const ArchivePage = () =>{
                 </div>
                 <div className="archive-container">
                     <div>
-                    {archive.map((item) => 
+                        {archive.length === 0 ? <h4>You dont have any arcchieve</h4>:
+                    archive.map((item) => 
                         <div key={item._id} className="note box-shadow">
                         <div className="h5 mt-1 bold-text">
                             {item.title}
@@ -34,11 +34,9 @@ export const ArchivePage = () =>{
                             </span>
                             <span>
                                 <i className="bi bi-archive-fill" 
-                                    onClick={
-                                        ()=>{
-                                            restoreArchive(item)
-                                            addNote(item)
-                                            deleteArchive(item)}}
+                                    onClick={()=>
+                                        restoreArchive(item)
+                                    }
                                 >
                                 </i>
                             </span>
@@ -51,10 +49,11 @@ export const ArchivePage = () =>{
                             </span>
                         </div>    
                     </div>
-                    )}
+                    )
+                    }
                     </div>
                 </div>
             </div>
         </div>
     )
-}
+                                    }

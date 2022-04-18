@@ -3,13 +3,14 @@ import { useNote } from "../../Context/NoteContext"
 import { EditNote } from "./Edit"
 
 export const SingleNote = ({note, date}) =>{
-    const {title,content,_id} = note
-    const {deleteNote,addArchieve} = useNote()
-
+    const {title,content,_id,color, label} = note
+    const {deleteNote, addArchieve, setEditNoteForm} = useNote()
+    console.log(note)
    
     return(
         <>
-        <div className="note box-shadow-bottom" key={_id}>
+        <div className="note box-shadow-bottom" key={_id} style={{backgroundColor:color
+        }}>
             <div className="h6">
                 {date}
             </div>
@@ -19,11 +20,17 @@ export const SingleNote = ({note, date}) =>{
             <div className="note-body">
                 {content}
             </div>     
+            <div>
+                {label}
+            </div>
             <div className="note-icons">
             
-                <span>
-                    
-                    <EditNote />
+                <span 
+onClick= {()=>{
+
+    setEditNoteForm({display:'block',note:note})
+}}                >
+                   edit
                 </span>
                 <span>
                     <i className="bi bi-trash-fill" onClick={() =>deleteNote(note)}></i>

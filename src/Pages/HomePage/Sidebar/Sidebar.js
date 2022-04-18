@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Link } from "react-router-dom"
-
+import { Link, Navigate } from "react-router-dom"
+import { useAuth } from '../../../Context/AuthContext'
 export const Sidebar = () =>{
+    const {setIsLogin} = useAuth()
     return(
         <div>
             <ul>
-                <Link to="/note">
+                <Link to="/home">
                 <li>
                     <i className="bi bi-house-door-fill mr-1"></i>Home
                 </li>
@@ -22,8 +22,10 @@ export const Sidebar = () =>{
                 </li>
                 </Link>
                 <li>
-                   <Link to="/note">
-                    <button className="btn btn-secondary width-100">Create New Note</button>
+                    <Link to="/">
+                    Logout <i className="bi bi-box-arrow-in-right" onClick={() =>{
+                         setIsLogin(false)
+                    }}></i>
                     </Link>
                 </li>
             </ul>

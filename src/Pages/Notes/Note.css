@@ -1,6 +1,6 @@
 .note-container{
     background-color: rgb(255, 255, 255);
-    width: 450px;
+    width: 500px;
     height: max-content;
     padding: 1rem;
     margin-top: 3rem;
@@ -8,6 +8,7 @@
 }
 .main-content{
     display: flex;
+    align-items: center;
     flex-direction: column;
     width: 80vw;
 }
@@ -18,20 +19,35 @@
 }
 .body-section{
     border: none;
-    width: 400px;
+    width: 450px;
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
     font-size: 1rem;
     border: none;
-    min-height:auto;
+    min-height:8rem;
+    background-color: none;
 }
-/* input{
+textarea{
+    border: 2px solid white;
+    background:none;
+}
+select{
     border: none;
-    width: 400px;
-} */
+    padding: 10px;
+    background-color: none;
+
+}
+select:focus{
+    border: none;
+    background-color: none;
+}
+option{
+    padding: 10px;
+    height: 1rem;
+}
+
 .info-section{
-    background-color: rgb(240, 240, 240);
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -41,6 +57,17 @@
 }
 .info-date{
     font-size: 1rem;
+}
+.input{
+    width: 450px;
+    border: none;
+}
+.toggle{
+    width: 50px;
+    align-items: center;
+    font-size: 1rem;
+    margin-top: 7px;
+    display: flex;
 }
 
 .info-icons{
