@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +41,7 @@ const AuthProvider = ({children}) =>{
                             setIsLogin(true)
 
                             localStorage.setItem("token", res.data.encodedToken);
-                            navigate('/')
+                            navigate('home')
                             localStorage.setItem("user",res.data.foundUser.firstName)
                         }
                       } catch (error) {

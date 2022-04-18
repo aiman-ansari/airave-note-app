@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { useState } from "react"
 import { useAuth } from "../../Context/AuthContext"
 import { Link } from "react-router-dom"
@@ -35,7 +37,6 @@ export default function SignUp(){
         else{
             setIsError('please fill all the filed')
         }
-        // setIsError('')
     }
     return(
         <div>
@@ -68,7 +69,7 @@ export default function SignUp(){
                                     
                                 </div>
                                 <div class="input-with-icons">
-                                    <i class="bi bi-message input-icon"></i>
+                                    <i class="bi bi-envelope-fill input-icon"></i>
                                     <input 
                                         type="email" 
                                         placeholder="Enter your Email"
@@ -109,7 +110,7 @@ export default function SignUp(){
                             </div>
                             <div className="flex-col gap-1">
                                 <div class="mt-1">
-                                    <button class="btn btn-gradient-pink width-100" type="submit">
+                                    <button class="btn btn-gradient-blue width-100" type="submit">
                                         SignUp
                                     </button>
                                 </div>
