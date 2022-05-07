@@ -5,7 +5,11 @@ import {SingleNote} from './../Notes/SingleNote'
 import { useNote } from '../../Context/NoteContext'
 import {Note } from '../Notes/Note'
 export const HomePage = () =>{
-    const {note} = useNote()
+    const {note, open, setOpen} = useNote()
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth() + 1)+'-'+today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() +':' +today.getSeconds()
+    var dateTime = date +' ' + time;
     return(
         <div>
             <Header />
@@ -18,16 +22,13 @@ export const HomePage = () =>{
                         <input type="text" placeholder="Search here" class="input"/>
                         <i className='bi bi-plus toggle'></i>
                     </div> 
-                    <Note />
+                    {open ==='add' ? <Note setOpen={setOpen}/> :<></>}
                     {note.length === 0 || note===undefined ?  <h4>You don't have any note</h4> :
                     <>
                     <div className="notes">
                         <div className="notes">
-                        {note.map((item) => 
-                        
-                           {return <SingleNote note={item} />}
-
-                            )}
+                       
+                            <SingleNote note={note} date={dateTime} setOpen={setOpen} open={open}/>
                      </div> 
 
                     </div> 

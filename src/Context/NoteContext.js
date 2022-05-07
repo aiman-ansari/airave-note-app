@@ -9,16 +9,19 @@ import { Navigate, useNavigate } from 'react-router-dom';
 const NoteContext = createContext()
 
 const useNote = () => useContext(NoteContext)
-
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var dateTime = date;
 const initialState = {
     title:"",
     content:"",
     priority:"",
+    date:dateTime,
+
 }
 const NoteProvider = ({children}) =>{
     const [note, setNote] = useState(initialState);
-    const [noteStyle , setNoteStyle] = useState("none")
-    const [editNoteForm , setEditNoteForm] = useState({display:'none',note:""})
+    const [open , setOpen ] = useState('none')
     const [archive, setArchive] = useState([])
     const token = localStorage.getItem("token")
     useEffect(()=>{
@@ -33,7 +36,7 @@ const NoteProvider = ({children}) =>{
         try{
             const res = await axios.get('/api/notes',{
                 headers:{
-                    authorization:token
+                    authorization:token,
                 }
             })
             setNote(res.data.notes)
@@ -51,10 +54,9 @@ const NoteProvider = ({children}) =>{
             },
             {
                 headers:{
-                    authorization : token
+                    authorization : token,
             },
             })
-            setNoteStyle("none")
             setNote(res.data.notes)
         }
         catch(err){
@@ -66,10 +68,11 @@ const NoteProvider = ({children}) =>{
             const res = await axios.delete(`/api/notes/${note._id}`, 
             {
                 headers:{
-                    authorization : token
+                    authorization : token,
                 }
             })
             setNote(res.data.notes)
+            console.log("deleted: ",res.data.notes)
         }
         catch(err){
             console.log(err)
@@ -84,12 +87,11 @@ const NoteProvider = ({children}) =>{
             {
                 
                 headers:{
-                    authorization : token
+                    authorization : token,
                 }
             }
             )
             setNote(res.data.notes)
-            setEditNoteForm({display:'none',note:""})
         }
         catch(err){
             console.log(err)
@@ -99,7 +101,7 @@ const NoteProvider = ({children}) =>{
         try{
             const res = await axios.get('/api/archives',{
                 headers:{
-                    authorization:token
+                    authorization:token,
                 }
             })
             setArchive(res.data.archives)
@@ -121,6 +123,7 @@ const NoteProvider = ({children}) =>{
                 
             })
             setArchive(res.data.archives)
+            setNote(res.data.notes)
         }
         catch(err){
             console.log(err)
@@ -161,11 +164,9 @@ const NoteProvider = ({children}) =>{
            }
     }
     
-    const [state,dispatch] = useReducer(filterReducer, {
-        rating:""
-    })
+   
     return(
-        <NoteContext.Provider value={{note,  noteStyle,setNoteStyle, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive, state,dispatch,editNoteForm,setEditNoteForm}}>
+        <NoteContext.Provider value={{note,  open, setOpen, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive}}>
             {children}
         </NoteContext.Provider>
     )

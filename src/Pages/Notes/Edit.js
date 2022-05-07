@@ -4,14 +4,18 @@ import { useNote } from "../../Context/NoteContext"
 
 import './Note.css'
 
-export const EditNote = (note) =>{
-    const {addNote, state, dispatch,updateNote, editNoteForm,setEditNoteForm} = useNote()
+export const EditNote = ({ note , id}) =>{
+console.log(id)
+    const {addNote, state, dispatch,updateNote, open, setOpen} = useNote()
+    console.log(open)
+
   console.log("note" , note)
-    const [title, setTitle] = useState(editNoteForm.note.title)
-    const [content, setContent] = useState(editNoteForm.note.content)
-    const [priority, setPriority] =useState(editNoteForm.note.priority)
-    const [color, setColor] = useState(editNoteForm.note.color)
-    const [label, setLabel] = useState(editNoteForm.note.label)
+    const { title } = note
+  console.log("title", note.title)
+    const [content, setContent] = useState(note.content)
+    const [priority, setPriority] =useState(note.priority)
+    const [color, setColor] = useState(note.color)
+    const [label, setLabel] = useState(note.label)
    console.log(title,content,priority,color)
     const updateNotes = () =>{
         updateNote({title,content,priority,color,label})
@@ -36,7 +40,8 @@ export const EditNote = (note) =>{
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var dateTime = date;
     return(
-        <div style={{ display: editNoteForm.display }}>
+        // <div style={{ display: editNoteForm.display }}>
+        <div>
             {/* <Header />
             <div className="flex">
                 <div className="sidebar">
@@ -66,7 +71,7 @@ export const EditNote = (note) =>{
                         className='title-section'
                         name="title"
                         value={title} 
-                        onChange={(e) =>setTitle(e.target.value)}
+                        // onChange={(e) =>setTitle(e.target.value)}
                         />
                     </div>
                     <div className='body-section'>
@@ -130,11 +135,12 @@ export const EditNote = (note) =>{
                             </div>
                             <span>
                                 <i className="bi bi-plus-circle-fill" onClick={() =>{
-                                    updateNote(title,content,priority,label,color,editNoteForm.note._id)
+                                    updateNote(title,content,priority,label,color)
+                                    // setOpen('none')
                                 }}></i>
                             </span>
                             <span>
-                                <i className="bi bi-trash-fill" onClick={() => setEditNoteForm({display:"none",note:""})}></i>
+                                <i className="bi bi-trash-fill" onClick={() => {}}></i>
                             </span>
                             {/* {open ? 
                                 <>

@@ -2,9 +2,10 @@ import React from 'react'
 import { useNote } from "../../Context/NoteContext"
 import { Header } from "../../Pages/HomePage/Header"
 import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
+import { Note } from '../Notes/Note'
 import './Archive.css'
 export const ArchivePage = () =>{
-    const {archive, restoreArchive, deleteArchive} = useNote()
+    const {archive, restoreArchive, deleteArchive , open , setOpen} = useNote()
     
     return(
         <div>
@@ -13,9 +14,14 @@ export const ArchivePage = () =>{
                 <div className="sidebar">
                     <Sidebar />
                 </div>
+                <div>
+
+                </div>
                 <div className="archive-container">
                     <div>
-                        {archive.length === 0 ? <h4>You dont have any arcchieve</h4>:
+                    {open ==='add' ? <Note setOpen={setOpen}/> :<></>}
+
+                        {archive.length === 0 ? <h4>You dont have any archive</h4>:
                     archive.map((item) => 
                         <div key={item._id} className="note box-shadow">
                         <div className="h5 mt-1 bold-text">

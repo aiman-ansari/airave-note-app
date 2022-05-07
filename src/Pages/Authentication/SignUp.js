@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { useState } from "react"
 import { useAuth } from "../../Context/AuthContext"
 import { Link } from "react-router-dom"
@@ -20,7 +19,6 @@ export default function SignUp(){
         value = e.target.value
         setNewUser({...newUser, [e.target.name] : value})
     }
-
     const handleSingup = (e) =>{
         const {firstName, lastName, email, password } = newUser
         e.preventDefault();

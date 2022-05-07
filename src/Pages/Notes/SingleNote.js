@@ -3,48 +3,62 @@ import { useNote } from "../../Context/NoteContext"
 import { EditNote } from "./Edit"
 
 export const SingleNote = ({note, date}) =>{
-    const {title,content,_id,color, label} = note
-    const {deleteNote, addArchieve, setEditNoteForm} = useNote()
-    console.log(note)
-   
+    const {deleteNote, addArchieve, updateNote, open, setOpen} = useNote()
+
+    // const deletedNote = (id) =>{
+    //     const filtered = note.filter((item) =>{
+    //       return  item._id === id
+    //     })
+    //     console.log(filtered)
+    //     deleteNote(filtered)
+    // }
+    // deleteNote()
     return(
         <>
-        <div className="note box-shadow-bottom" key={_id} style={{backgroundColor:color
+                {open ==='edit' ? <EditNote open={open} setOpen={setOpen} note={note} id={note._id}/> :<>
+                {note.length>0  ?  
+        note.map((item) => 
+        <div className="note box-shadow-bottom" key={item._id} style={{backgroundColor:item.color
         }}>
             <div className="h6">
                 {date}
             </div>
             <div className="h5 mt-1 bold-text">
-                {title}
+                {item.title}
             </div>
             <div className="note-body">
-                {content}
+                {item.content}
             </div>     
             <div>
-                {label}
+                {item.label}
             </div>
             <div className="note-icons">
             
-                <span 
-onClick= {()=>{
-
-    setEditNoteForm({display:'block',note:note})
-}}                >
+                <button
+                    onClick= {(_id)=>{
+                        setOpen('edit')
+                    }}                >
                    edit
+                </button>
+                <span>
+                    <i className="bi bi-trash-fill"
+                        onClick={() =>deleteNote(item)}>
+                    </i>
                 </span>
                 <span>
-                    <i className="bi bi-trash-fill" onClick={() =>deleteNote(note)}></i>
+                    <i className="bi bi-archive-fill" 
+                        onClick={()=>addArchieve(item)}>
+                    </i>
                 </span>
-                                <span>
-                                    <i className="bi bi-archive-fill" onClick={
-                                        ()=>{addArchieve(note)
-                                    deleteNote(note)}}></i>
-                                </span>
-                                <span>
-                                    <i className="bi bi-label"></i>
-                                </span>
                             </div>      
-        </div>
+        </div> 
+         ) 
+         :
+        <h1>note</h1>
+        
+        }                
+                </>}
         </>
+
     )
 }

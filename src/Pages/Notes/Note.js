@@ -2,26 +2,25 @@ import React from 'react'
 import { useState } from "react"
 import { useNote } from "../../Context/NoteContext"
 import './Note.css'
-import { filterFunction } from '../../Reducer/filterFunction'
 export const Note = () =>{
-    const {note, addNote, state,deleteNote} = useNote()
+    const {addNote,setOpen} = useNote()
   
     const [title, setTitle] = useState()
     const [content, setContent] = useState()
     const [priority, setPriority] =useState('low')
     const [color, setColor] = useState('color')
     const [label, setLabel] = useState('')
-   console.log(title,content,priority,color)
     const addNotes = () =>{
         addNote({title,content,priority,color,label})
+
         setTitle('')
         setContent('')
         setColor('color')
         setPriority('low')
         setLabel('')
+        setOpen('none')
     } 
     
-      const allFilterNotes = filterFunction(note, state)
 
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -88,7 +87,10 @@ export const Note = () =>{
                                 }}></i>
                             </span>
                             <span>
-                                <i className="bi bi-trash-fill"></i>
+                                <i className="bi bi-trash-fill" 
+                                onClick={() =>{
+                                    setOpen('none')
+                                }}></i>
                             </span>
                         </div>
                     </div>

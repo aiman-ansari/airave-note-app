@@ -1,12 +1,9 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { useNote } from "../../Context/NoteContext"
 import { Header } from "../../Pages/HomePage/Header"
 import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
-// import './Archive.css'
 export const DeletePage = () =>{
     const {archive, restoreArchive, addNote, deleteArchive , note, deleteNote} = useNote()
-    console.log("getting archieves:",archive)
     return(
         <div>
             <Header />
