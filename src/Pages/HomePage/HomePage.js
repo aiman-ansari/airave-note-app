@@ -1,12 +1,6 @@
 import React from 'react'
-import {Sidebar} from './Sidebar/Sidebar'
-import { Header } from './Header'
-import {SingleNote} from './../Notes/SingleNote'
+import { Note, Filter, filterFunc, EditNote, Sidebar , SingleNote, Header} from '../../Component'
 import { useNote } from '../../Context/NoteContext'
-import {Note } from '../Notes/Note'
-import { Filter } from './Filter/Filter'
-import { filterFunc } from './Filter/FilterFunc'
-import { EditNote } from '../Notes/Edit'
 export const HomePage = () =>{
     const {note, open, setOpen, state} = useNote()
    

@@ -1,8 +1,6 @@
 import React from 'react'
 import { useNote } from "../../Context/NoteContext"
-import { Header } from "../../Pages/HomePage/Header"
-import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
-import { Note } from '../Notes/Note'
+import { Note, Sidebar, Header} from '../../Component'
 import './Archive.css'
 import './../HomePage/HomePage.css' 
 export const ArchivePage = () =>{

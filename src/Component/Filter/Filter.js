@@ -1,6 +1,6 @@
 import React from "react"
 import { useState } from "react"
-import { useNote } from "../../../Context/NoteContext"
+import { useNote } from "./../../Context/NoteContext"
 import './Filter.css'
 
 export const Filter = () =>{
