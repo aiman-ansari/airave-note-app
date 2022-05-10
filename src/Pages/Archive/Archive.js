@@ -4,21 +4,19 @@ import { Header } from "../../Pages/HomePage/Header"
 import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
 import { Note } from '../Notes/Note'
 import './Archive.css'
+import './../HomePage/HomePage.css' 
 export const ArchivePage = () =>{
     const {archive, restoreArchive, deleteArchive , open , setOpen} = useNote()
     
     return(
         <div>
-            <Header />
-            <div className="flex">
-                <div className="sidebar">
-                    <Sidebar />
-                </div>
-                <div>
-
-                </div>
-                <div className="archive-container">
-                    <div>
+        <Header />
+        <div className="home-container">
+            <div className="sidebar">
+                <Sidebar />
+            </div>
+            <div className="main-content m-3">
+                <div className='archive-container'>
                     {open ==='add' ? <Note setOpen={setOpen}/> :<></>}
 
                         {archive.length === 0 ? <h4>You dont have any archive</h4>:
@@ -59,7 +57,7 @@ export const ArchivePage = () =>{
                     }
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
     )
                                     }

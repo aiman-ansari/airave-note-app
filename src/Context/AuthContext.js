@@ -22,7 +22,6 @@ const AuthProvider = ({children}) =>{
             if(res.status== 200 || res.status== 201){
                  setIsLogin(true)
                  localStorage.setItem("token", res.data.encodedToken)
-                 console.log(res.data)
                  setMatch(res.data.createdUser)
                  navigate('/login')
             }

@@ -1,23 +1,17 @@
 import React from 'react'
 import { createContext, useContext } from "react";
-import { useState } from "react";
+import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
-import { useEffect } from "react";
-import { useReducer } from 'react';
-import { filterReducer } from '../Reducer/FilterReducer';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { FilterReducer } from './../Reducer/FilterReducer';
 const NoteContext = createContext()
 
 const useNote = () => useContext(NoteContext)
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var dateTime = date;
+   
 const initialState = {
     title:"",
     content:"",
     priority:"",
-    date:dateTime,
-
+    date:"",
 }
 const NoteProvider = ({children}) =>{
     const [note, setNote] = useState(initialState);
@@ -160,13 +154,16 @@ const NoteProvider = ({children}) =>{
            }
            catch(err)
            {
-              
+                console.log(err)  
            }
     }
-    
-   
+   const [state, dispatch] = useReducer(FilterReducer , {
+       sort:"",
+       date:"",
+       label:""
+   })
     return(
-        <NoteContext.Provider value={{note,  open, setOpen, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive}}>
+        <NoteContext.Provider value={{state, dispatch,note,  open, setOpen, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive}}>
             {children}
         </NoteContext.Provider>
     )

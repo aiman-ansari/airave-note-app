@@ -1,28 +1,36 @@
 
 nav{
-    background-color: var(--bh-light);
+    background-color: rgb(252, 252, 252);
     height: 4rem;
-    box-shadow: 0px 3px 6px 0px rgba(158,158,158,1);
-    display: flex;
+    padding: 0 3rem 0 3rem;
+    box-shadow: 0px 2px 24px -1px rgba(115,115,115,1);
+        display: flex;
     justify-content: flex-start;
     align-items: center;
+    border-bottom: 1px solid gray;
 }
 .brand{
     margin-left: 6rem;
     font-size: 1.5rem;
     color: var(--primary-color);
 }
+.home-container{
+    padding: 0 3rem 0 3rem;
+    display: flex;
+    background-color: rgb(252, 252, 252);
+}
 .sidebar{
-    /* background-color: red; */
     height: 95vh;
     padding-left: 6rem;
     width: 300px;
 }
-/* .main-content{
-    background-color: rgb(244, 244, 244);
-    width: 800px;
-    margin-left: 1rem;
-} */
+
+.main-content{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80vw;
+}
 ul{
     font-size: 1.3rem;
     margin-top: 2rem;
@@ -34,4 +42,9 @@ ul li{
 }
 .bi{
     font-size: 1.5rem;
+}
+.search-input{
+    width: 40rem;
+    border: none;
+    padding: 0.5rem;
 }

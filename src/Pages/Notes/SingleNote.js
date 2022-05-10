@@ -2,26 +2,12 @@ import React from 'react'
 import { useNote } from "../../Context/NoteContext"
 import { EditNote } from "./Edit"
 
-export const SingleNote = ({note, date}) =>{
+export const SingleNote = ({ item }) =>{
     const {deleteNote, addArchieve, updateNote, open, setOpen} = useNote()
-
-    // const deletedNote = (id) =>{
-    //     const filtered = note.filter((item) =>{
-    //       return  item._id === id
-    //     })
-    //     console.log(filtered)
-    //     deleteNote(filtered)
-    // }
-    // deleteNote()
     return(
-        <>
-                {open ==='edit' ? <EditNote open={open} setOpen={setOpen} note={note} id={note._id}/> :<>
-                {note.length>0  ?  
-        note.map((item) => 
-        <div className="note box-shadow-bottom" key={item._id} style={{backgroundColor:item.color
-        }}>
+        <div className="note box-shadow-bottom" key={item._id} style={{backgroundColor:item.color}}>
             <div className="h6">
-                {date}
+                {item.date}
             </div>
             <div className="h5 mt-1 bold-text">
                 {item.title}
@@ -29,17 +15,21 @@ export const SingleNote = ({note, date}) =>{
             <div className="note-body">
                 {item.content}
             </div>     
-            <div>
+            <div className='flex gap-3'>
+                <div>Priority:
+                {item.priority}
+                </div>
+                <div>Tag:
                 {item.label}
+                </div>
             </div>
             <div className="note-icons">
-            
-                <button
-                    onClick= {(_id)=>{
-                        setOpen('edit')
-                    }}                >
-                   edit
-                </button>
+                <i class="bi bi-pencil-square" 
+                    onClick={()=>{
+                    setOpen('edit')         
+                    EditNote(item)  
+                }}>
+                </i>
                 <span>
                     <i className="bi bi-trash-fill"
                         onClick={() =>deleteNote(item)}>
@@ -50,15 +40,7 @@ export const SingleNote = ({note, date}) =>{
                         onClick={()=>addArchieve(item)}>
                     </i>
                 </span>
-                            </div>      
+            </div>      
         </div> 
-         ) 
-         :
-        <h1>note</h1>
-        
-        }                
-                </>}
-        </>
-
     )
 }
