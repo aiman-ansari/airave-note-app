@@ -6,6 +6,7 @@ export const HomePage = () =>{
     const {note, open, setOpen, state} = useNote()
    
     let sorted = filterFunc(note, state)    
+    console.log(open)
     return(
         <div>
             <Header />
@@ -22,11 +23,10 @@ export const HomePage = () =>{
                         }}>
                         </i>         
                     </div> 
-                    {open ==='add' || open==="label" ? 
+                    {open ==='add' || open==="label" || open==="color" ? 
                     <>
                     <Note setOpen={setOpen}/>  
                     </>:<></>}
-                    {/* {open === "label" ? <Label /> :<></>} */}
 
                     {open ==='filter' && <Filter />}
 

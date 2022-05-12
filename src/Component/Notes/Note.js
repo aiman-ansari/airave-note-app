@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react"
 import { useNote } from "../../Context/NoteContext"
 import { Label } from '../Label/Label'
+import { Color } from '../Color/Color'
 import './Note.css'
 export const Note = () =>{
     const {addNote,setOpen, open,  labels, setLabels} = useNote()
@@ -9,9 +10,10 @@ export const Note = () =>{
     const [title, setTitle] = useState()
     const [content, setContent] = useState()
     const [priority, setPriority] =useState('low')
-    const [color, setColor] = useState('color')
+    const [color, setColor] = useState('')
     const [label, setLabel] = useState([])
-    
+    console.log(open)
+    console.log(color)
     const addNotes = () =>{
          
         if(!labels.includes(label)){
@@ -33,7 +35,9 @@ export const Note = () =>{
         }
         
     }
-   
+   const handleColor = (string) =>{
+       setColor(string)
+   }
     var today = new Date();
      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
      var time = today.getHours() + ':' + today.getMinutes() +':' +today.getSeconds()
@@ -72,14 +76,22 @@ export const Note = () =>{
                             </select>
                         </div>
                         <div>
-                            <select value={color} onChange={e =>setColor(e.target.value)}>
+                            {/* <select value={color} onChange={e =>setColor(e.target.value)}>
                                 <option value="none" label="color"></option>
                                 <option value="#F0FFFF" label="Azure"></option>
                                 <option value="#FFF8DC" label='CornSilk'></option>
                                 <option value="#8FBC8F" label="Sea green"></option>
                                 <option value="#FFE4E1" label='Light Coral'></option>
-                            </select>
+                            </select> */}
+                        {open ==="color" ?
+                         <i className='bi bi-palette-fill' onClick={()=>setOpen('add')}></i> :
+                                <i className='bi bi-palette-fill' onClick={()=>setOpen('color')}></i>
+
+}
+
+    
                         </div>
+                        {open ==="color" && <Color handleColor={handleColor}/>}
                         <div>
                             <i className='bi bi-tag-fill' onClick={()=>setOpen('label')}></i>
                         </div>
