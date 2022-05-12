@@ -11,38 +11,33 @@ export const Note = () =>{
     const [priority, setPriority] =useState('low')
     const [color, setColor] = useState('color')
     const [label, setLabel] = useState([])
-    console.log(label)
-    // const something = [...label]
-    // console.log(something)
-    // console.log(newLabel)
+    
     const addNotes = () =>{
+         
+        if(!labels.includes(label)){
+            setLabel(labels => [...labels, label ])
+
+        }
         addNote({title,content,priority,color,label, date, time})
         setTitle('')
         setContent('')
         setColor('color')
         setPriority('low')
         setLabel('')
-        // setLabel('')
         setOpen('none')
     } 
     const handleLabel = (string) =>{
-        if(!string.includes(string)){
+        
+        if( !string.includes(string) ){
             setLabel(string)
-
         }
         
     }
-    console.log(label)
+   
     var today = new Date();
      var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
      var time = today.getHours() + ':' + today.getMinutes() +':' +today.getSeconds()
-    //  const Label = () =>{
-    //      return(
-    //          <>
-    //          label
-    //          </>
-    //      )
-    //  }
+   
      return(
         <div>
 
@@ -86,13 +81,7 @@ export const Note = () =>{
                             </select>
                         </div>
                         <div>
-                            {/* <select value={label} onChange={e =>setLabel(e.target.value)}>
-                                <option value="Assignment" label="Assignment"></option>
-                                <option value="Exercise" label='Exercise'></option>
-                                <option value="Meeting" label="Meeting"></option>
-                                <option value="Task" label='Task'></option>
-                            </select> */}
-                            <i className='bi bi-heart-fill' onClick={()=>setOpen('label')}></i>
+                            <i className='bi bi-tag-fill' onClick={()=>setOpen('label')}></i>
                         </div>
                         <span>
                             <i className="bi bi-plus-circle-fill" onClick={() =>{
@@ -110,13 +99,16 @@ export const Note = () =>{
                     </div>
 
                 </div>
-                {open === 'label' ? <Label handleLabel={handleLabel}/> : <></>}
+                {open === 'label' && <Label handleLabel={handleLabel}/> }
 
             </div>
-                {label.length > 0 && <>
-                <h5>Labels </h5>
-                <h6>{label.map((item) => <h5>{item}</h5>)}</h6>
-                </> }
+                {label.length > 0 ?
+                    <div className='label-container'>
+                        <h5>Labels </h5>
+                        <div className='label-text' >{label.map((item) => <div className='label'>{item}</div>)}</div>
+                    </div> 
+                    :
+                <></>}
         </div>
     )
 }

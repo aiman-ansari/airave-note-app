@@ -3,11 +3,17 @@ import { useNote } from "../../Context/NoteContext"
 import { EditNote } from "./Edit"
 
 export const SingleNote = ({ item }) =>{
-    const {deleteNote, addArchieve, updateNote, open, setOpen} = useNote()
+    const {deleteNote, addArchieve, updateNote, open, setOpen, labels, setLabels} = useNote()
     const edithandler = (item) =>{
         setOpen('edit')
 
         EditNote(item)
+    }
+    
+    const handleDelete = (item) =>{
+
+        setLabels(labels.filter((i)=> !item.label.includes(i)))
+        deleteNote(item)
     }
     return(
         <div className="note box-shadow-bottom" key={item._id} style={{backgroundColor:item.color}}>
@@ -35,7 +41,7 @@ export const SingleNote = ({ item }) =>{
                 </i>
                 <span>
                     <i className="bi bi-trash-fill"
-                        onClick={() =>deleteNote(item)}>
+                        onClick={() =>handleDelete(item)}>
                     </i>
                 </span>
                 <span>

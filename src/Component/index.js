@@ -5,4 +5,5 @@ import { Note } from "./Notes/Note";
 import { SingleNote } from "./Notes/SingleNote";
 import { Sidebar } from "./Sidebar/Sidebar";
 import { Header } from "./Header";
-export { Filter, filterFunc, EditNote, Note, SingleNote, Sidebar, Header}
+import { Color } from "./Color/Color";
+export { Filter, filterFunc, EditNote, Note, SingleNote, Sidebar, Header, Color}

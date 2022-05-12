@@ -1,0 +1,20 @@
+.label-input{
+    border-style: none;
+    border-bottom: 2px solid black;
+    width: 10rem;
+
+}
+.btn-label{
+    background-color: var(--light-color);
+    border: 2px solid var(--primary-color);
+    padding: 0.3rem 1rem 0.3rem 1rem;
+    margin-left: 1rem;
+    color: var(--gray-text);
+    border-radius: 10px;
+}
+.btn-label:hover{
+    transition: 0.9s;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-radius: 10px;
+}
