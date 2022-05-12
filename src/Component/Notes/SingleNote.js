@@ -4,6 +4,11 @@ import { EditNote } from "./Edit"
 
 export const SingleNote = ({ item }) =>{
     const {deleteNote, addArchieve, updateNote, open, setOpen} = useNote()
+    const edithandler = (item) =>{
+        setOpen('edit')
+
+        EditNote(item)
+    }
     return(
         <div className="note box-shadow-bottom" key={item._id} style={{backgroundColor:item.color}}>
             <div className="h6">
@@ -19,16 +24,14 @@ export const SingleNote = ({ item }) =>{
                 <div>Priority:
                 {item.priority}
                 </div>
-                <div>Tag:
-                {item.label}
+                <div className='flex'>
+                {item.label.length > 0 ? <>
+                    <span>Tag :</span>{item.label.map((item) => <div className='ml-1'>{item}</div>)}</> : <></>}
                 </div>
             </div>
             <div className="note-icons">
                 <i class="bi bi-pencil-square" 
-                    onClick={()=>{
-                    setOpen('edit')         
-                    EditNote(item)  
-                }}>
+                    onClick={() =>edithandler(item)}>
                 </i>
                 <span>
                     <i className="bi bi-trash-fill"

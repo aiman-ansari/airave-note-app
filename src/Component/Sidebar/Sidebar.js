@@ -18,6 +18,11 @@ export const Sidebar = () =>{
                     <i className="bi bi-trash-fill mr-1"></i>Delete
                 </li>
                 </Link>
+                <Link to="/label">
+                <li>
+                    <i className="bi bi-plus mr-1"></i>Label
+                </li>
+                </Link>
                 <Link to="/archive">
                 <li>
                     <i class="bi bi-archive mr-1"></i>Archive

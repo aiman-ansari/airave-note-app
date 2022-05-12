@@ -1,6 +1,7 @@
 import React from 'react'
 import { Note, Filter, filterFunc, EditNote, Sidebar , SingleNote, Header} from '../../Component'
 import { useNote } from '../../Context/NoteContext'
+import { Label } from '../../Component/Label/Label'
 export const HomePage = () =>{
     const {note, open, setOpen, state} = useNote()
    
@@ -21,7 +22,11 @@ export const HomePage = () =>{
                         }}>
                         </i>         
                     </div> 
-                    {open ==='add' ? <Note setOpen={setOpen}/> :<></>}
+                    {open ==='add' || open==="label" ? 
+                    <>
+                    <Note setOpen={setOpen}/>  
+                    </>:<></>}
+                    {/* {open === "label" ? <Label /> :<></>} */}
 
                     {open ==='filter' && <Filter />}
 

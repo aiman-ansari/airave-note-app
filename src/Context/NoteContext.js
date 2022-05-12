@@ -17,6 +17,8 @@ const NoteProvider = ({children}) =>{
     const [note, setNote] = useState(initialState);
     const [open , setOpen ] = useState('none')
     const [archive, setArchive] = useState([])
+    const [labels, setLabels] = useState([])
+    const [arr, setArr] = useState([])
     const token = localStorage.getItem("token")
     useEffect(()=>{
         getNote()
@@ -25,7 +27,11 @@ const NoteProvider = ({children}) =>{
     useEffect(()=>{
         getArchive()
     },[])
-
+    // const getArr = () =>{
+    //     setArr(arr => [...arr, label])
+    //     console.log(arr)
+    // }
+    // getArr()
     const getNote = async() =>{
         try{
             const res = await axios.get('/api/notes',{
@@ -34,12 +40,14 @@ const NoteProvider = ({children}) =>{
                 }
             })
             setNote(res.data.notes)
+            
         }
         catch(err){
             console.log(err)
         }
     }
-
+    console.log("label from context:",labels)
+    console.log("note" , note)
     const addNote = async(note) =>{
         try{
             const res = await axios.post('/api/notes', 
@@ -163,7 +171,7 @@ const NoteProvider = ({children}) =>{
        label:""
    })
     return(
-        <NoteContext.Provider value={{state, dispatch,note,  open, setOpen, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive}}>
+        <NoteContext.Provider value={{state, dispatch,note,  open, setOpen, setNote, addNote, deleteNote, updateNote, addArchieve, restoreArchive, deleteArchive,archive, labels, setLabels}}>
             {children}
         </NoteContext.Provider>
     )
