@@ -76,14 +76,7 @@ export const Note = () =>{
                             </select>
                         </div>
                         <div>
-                            {/* <select value={color} onChange={e =>setColor(e.target.value)}>
-                                <option value="none" label="color"></option>
-                                <option value="#F0FFFF" label="Azure"></option>
-                                <option value="#FFF8DC" label='CornSilk'></option>
-                                <option value="#8FBC8F" label="Sea green"></option>
-                                <option value="#FFE4E1" label='Light Coral'></option>
-                            </select> */}
-                        {open ==="color" ?
+                           {open ==="color" ?
                          <i className='bi bi-palette-fill' onClick={()=>setOpen('add')}></i> :
                                 <i className='bi bi-palette-fill' onClick={()=>setOpen('color')}></i>
 

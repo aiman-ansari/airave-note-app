@@ -12,7 +12,9 @@ export const filterFunc = (note, {label, sort, date}) =>{
         sortedNote = sortedNote.filter((item) => item.priority === sort)
     }
     if(label && sortedNote){
-        sortedNote = sortedNote.filter((item) => item.label.every((tag) => tag.includes(label)))
+             sortedNote = sortedNote.filter((note) =>
+            note.label.includes(label)
+            )
         console.log(sortedNote)
         return sortedNote
     }

@@ -3,7 +3,8 @@ import { Note, Filter, filterFunc, EditNote, Sidebar , SingleNote, Header} from 
 import { useNote } from '../../Context/NoteContext'
 import { Label } from '../../Component/Label/Label'
 export const HomePage = () =>{
-    const {note, open, setOpen, state} = useNote()
+    const {note, open, setOpen, state, dispatch} = useNote()
+    
    
     let sorted = filterFunc(note, state)    
     console.log(open)
@@ -17,11 +18,23 @@ export const HomePage = () =>{
                 <div className="main-content m-3">
                     <div className='flex box-shadow-bottom mt-2'>
                         <input type="text" placeholder="Search here" class="search-input"/>
+                        {open === 'filter' ? 
+                        <i className='bi bi-filter toggle' 
+                            onClick={() =>{
+                            
+                                dispatch({
+                                    type:"CLEAR_ALL",
+                                })
+                                setOpen('none')
+
+                        }}></i> :
                         <i className='bi bi-filter toggle' 
                             onClick={() =>{
                             setOpen('filter')
-                        }}>
-                        </i>         
+                        }}></i>
+                        }
+                        
+                                
                     </div> 
                     {open ==='add' || open==="label" || open==="color" ? 
                     <>

@@ -13,7 +13,6 @@ export const Label = () =>{
                 <Sidebar />
             </div>
             <div className="main-content m-3">
-               
                 {labels.length > 0
                      ? labels.map((label, index) => {
                          const filteredLabel = note.filter((note) =>
@@ -44,10 +43,9 @@ export const Label = () =>{
                 );
               }
             })
-          : null}
+          : 
+          <h4>You don't have any label</h4>}
       </div>
-      {note.length < 1 && <>You Don't have any label</>
-      }
                
             </div>
         </div>

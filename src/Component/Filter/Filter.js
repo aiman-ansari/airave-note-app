@@ -71,7 +71,6 @@ export const Filter = () =>{
                 })
             }}>Clear filter
             </span> 
-            <i className="bi bi-x" onClick={()=>setOpen('none')}></i>
         </div>
     </div>
     )
