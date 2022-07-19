@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom"
-import { useAuth } from '../../../Context/AuthContext'
-import { useNote } from '../../../Context/NoteContext';
+import { useAuth } from '../../Context/AuthContext'
+import { useNote } from '../../Context/NoteContext';
 export const Sidebar = () =>{
     const {setIsLogin} = useAuth();
     const { setOpen} = useNote()

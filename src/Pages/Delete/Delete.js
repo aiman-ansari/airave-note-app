@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNote } from "../../Context/NoteContext"
-import { Header } from "../../Pages/HomePage/Header"
-import { Sidebar } from "../../Pages/HomePage/Sidebar/Sidebar"
+import { Sidebar, Header } from '../../Component'
 export const DeletePage = () =>{
     const {archive, restoreArchive, addNote, deleteArchive , note, deleteNote} = useNote()
     return(

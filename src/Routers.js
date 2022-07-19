@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from "react-router-dom"
-import { HomePage, LangingPage, Note, DeletePage, ArchivePage, SignUp, Login } from "./Pages"
+import { HomePage, LangingPage,  DeletePage, ArchivePage, SignUp, Login } from "./Pages"
 import Mockman from 'mockman-js'
 export const Routers = () =>{
     return(
@@ -10,7 +10,6 @@ export const Routers = () =>{
                 <Route path="signup" element={<SignUp />} />
                 <Route path="login" element={<Login />} />
                 <Route path="home" element={<HomePage />} />
-                <Route path="note" element={<Note />} />
                 <Route path='delete' element={<DeletePage />} />
                 <Route path='archive' element={<ArchivePage />} />
                 <Route path="mock" element={<Mockman />} />
