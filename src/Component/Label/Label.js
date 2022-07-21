@@ -8,18 +8,14 @@ export const Label = ({ handleLabel }) => {
   const [arr, setArr] = useState([]);
   const handleLabels = () => {
     if (text !== "") {
-      setLabels((labels) => [...labels, text]);
-      setArr((arr) => [...arr, text]);
-      setText("");
-      // if(!labels.includes(text)){
-      //     setLabels(labels =>[...labels, text])
-      //     setArr(arr => [...arr, text])
-      //     setText('')
-      // }
-      //     else  if(!arr.includes(text)){
-      //         setLabels(labels)
-      //         setArr(arr => [...arr, text])
-      //     }
+      if (!labels.includes(text)) {
+        setLabels((labels) => [...labels, text]);
+        setArr((arr) => [...arr, text]);
+        setText("");
+      } else if (!arr.includes(text)) {
+        setLabels(labels);
+        setArr((arr) => [...arr, text]);
+      }
     } else {
       setText("");
     }

@@ -5,15 +5,13 @@ import { Label } from "../Label/Label";
 import { Color } from "../Color/Color";
 import "./Note.css";
 export const Note = () => {
-  const { addNote, setOpen, open, labels, setLabels } = useNote();
-  console.log(open);
+  const { addNote, setOpen, open, labels } = useNote();
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
   const [priority, setPriority] = useState("low");
   const [color, setColor] = useState("");
   const [label, setLabel] = useState([]);
-  console.log(open);
-  console.log(color);
+
   const addNotes = () => {
     if (!labels.includes(label)) {
       setLabel((labels) => [...labels, label]);
@@ -42,10 +40,7 @@ export const Note = () => {
 
   return (
     <div>
-      <div
-        className='note-container box-shadow'
-        style={{ backgroundColor: color }}
-      >
+      <div className='note box-shadow' style={{ backgroundColor: color }}>
         <div>
           <input
             type='text'

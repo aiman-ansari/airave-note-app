@@ -4,7 +4,7 @@ import { useNote } from "./../../Context/NoteContext";
 import "./Filter.css";
 
 export const Filter = () => {
-  const { setOpen, dispatch, labels, setLabels, state } = useNote();
+  const { dispatch, labels } = useNote();
   const [priority, setPriority] = useState("All");
   const [date, setDate] = useState("Oldest First");
 
@@ -34,14 +34,14 @@ export const Filter = () => {
     <div className='filter-container'>
       <div className='filter'>
         <div>
-          <span>Date</span>
+          <span>Date :</span>
           <select value={date} onChange={handleSortByDate}>
             <option value='old'>Oldest first</option>
             <option value='new'>Newest first</option>
           </select>
         </div>
         <div>
-          <span>Priority:</span>
+          <span>Priority :</span>
           <select value={priority} onChange={handlePriority}>
             <option value='low' label='low'></option>
             <option value='high' label='high'></option>
@@ -53,7 +53,7 @@ export const Filter = () => {
             {label.length > 0 ? (
               label.map((item) => <option value={item} label={item}></option>)
             ) : (
-              <>nope!!</>
+              <></>
             )}
           </select>
         </div>

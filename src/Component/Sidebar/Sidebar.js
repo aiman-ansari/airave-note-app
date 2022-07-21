@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useNote } from "../../Context/NoteContext";
+import "./Sidebar.css";
 export const Sidebar = () => {
   const { setIsLogin } = useAuth();
-  const { setOpen } = useNote();
   return (
-    <div>
+    <div className='sidebar-container'>
       <ul>
         <Link to='/home'>
           <li>
@@ -28,16 +28,7 @@ export const Sidebar = () => {
             <i class='bi bi-archive-fill mr-1'></i>Archive
           </li>
         </Link>
-        <li>
-          {/* <button
-            className='btn btn-secondary'
-            onClick={() => {
-              setOpen("add");
-            }}
-          >
-            Create new note
-          </button> */}
-        </li>
+        <li></li>
         <li>
           <Link to='/'>
             Logout{" "}
