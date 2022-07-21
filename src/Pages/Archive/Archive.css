@@ -1,11 +1,5 @@
-/* .note{
-    display: flex;
-    gap: 1rem;
-    margin:1rem 0rem 1rem 0rem
-} */
 .archive-container{
     display: flex;
-    /* width: 10rem; */
     justify-content: space-between;
 }
 .archive-container .note{

@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 export default function Login(){
 
     const {handleLoginData, match} = useAuth();
+    const [check , setCheck ] = useState(true)
 
-    console.log(match.password)
     const [login, setLogin] = useState({
         email:'',
         password:''
@@ -75,6 +75,7 @@ export default function Login(){
                     <input 
                     type="checkbox" 
                     id="checkbox"
+                    checked= {check}
                     />
                     <span class="pd--5">
                         Remember me

@@ -98,8 +98,8 @@ export default function SignUp(){
                                     <input 
                                     type="checkbox" 
                                     id="checkbox"
-                                    required
-                                    />                    
+                                    ischecked = "checked"
+                                />                    
                                     <span class="pd--5">
                                         Remember me
                                     </span>
