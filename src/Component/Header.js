@@ -1,6 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './HomePage.css'
+import '../Pages/HomePage/HomePage.css' 
 export const Header = () =>{
     return(           
             <nav>
@@ -10,6 +9,5 @@ export const Header = () =>{
                 </div>
                 
             </nav>   
-      
     )
 }

@@ -4,25 +4,30 @@ import { useNote } from "../../Context/NoteContext"
 
 import './Note.css'
 
-export const EditNote = (note) =>{
-    const {addNote, state, dispatch,updateNote, editNoteForm,setEditNoteForm} = useNote()
-  console.log("note" , note)
-    const [title, setTitle] = useState(editNoteForm.note.title)
-    const [content, setContent] = useState(editNoteForm.note.content)
-    const [priority, setPriority] =useState(editNoteForm.note.priority)
-    const [color, setColor] = useState(editNoteForm.note.color)
-    const [label, setLabel] = useState(editNoteForm.note.label)
-   console.log(title,content,priority,color)
-    const updateNotes = () =>{
-        updateNote({title,content,priority,color,label})
+export const EditNote = ( item ) =>{
+    const {addNote, state, dispatch,updateNote, open, setOpen} = useNote()
+    console.log(open)
+
+  console.log("note" , item)
+//   console.log(title)
+//     const { title } = note
+// //   console.log("title", note.title)
+    const [title, setTitle] = useState(item.title)
+    const [content, setContent] = useState(item.content)
+    const [priority, setPriority] =useState(item.priority)
+    const [color, setColor] = useState(item.color)
+    const [label, setLabel] = useState(item.label)
+//    console.log(title,content,priority,color)
+//     const updateNotes = () =>{
+//         updateNote({title,content,priority,color,label})
         
-        // addNote(newNote)
-        // setNewNote({
-        //     content:'',
-        //     title:'',
-        //     priority:''
-        // })
-    } 
+//         // addNote(newNote)
+//         // setNewNote({
+//         //     content:'',
+//         //     title:'',
+//         //     priority:''
+//         // })
+//     } 
     // console.log(newNote)
     // const openLabel = () =>{
     //     setOpen(true)
@@ -32,32 +37,9 @@ export const EditNote = (note) =>{
     // }
     //   const allFilterNotes = filterFunction(note, state)
 
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var dateTime = date;
+   
     return(
-        <div style={{ display: editNoteForm.display }}>
-            {/* <Header />
-            <div className="flex">
-                <div className="sidebar">
-                    <Sidebar />
-                </div>
-                <div className="main-content"> */}
-                    {/* <div class="searchbox">
-                        <i class="fa fa-search input-icon" onClick={()=>
-                            setOpen(!open)
-                        }></i>
-                        <input type="text" placeholder="Search here"class="search-input"/>
-                    </div> */}
-                    {/* <div className='flex box-shadow-bottom mt-2'>
-                        <input type="text" placeholder="Search here" class="input"/>
-                        <i className='bi bi-plus toggle'></i>
-                    </div> */}
-                    {
-                        // open && <>
-                            // <Filter />
-                            // </>
-                    }
+        <div>
                     <div className="note-container box-shadow" style={{backgroundColor:color}}>
                     <div >
                         <input 
@@ -66,7 +48,6 @@ export const EditNote = (note) =>{
                         className='title-section'
                         name="title"
                         value={title} 
-                        onChange={(e) =>setTitle(e.target.value)}
                         />
                     </div>
                     <div className='body-section'>
@@ -79,8 +60,7 @@ export const EditNote = (note) =>{
                     <hr />
                     <div className='info-section'>
                         <div className="info-date">
-                            {`Created at ${dateTime}`}
-                        </div>
+                                                    </div>
                         
                         <div className="info-icons">
                             {/* <div className='flex gap-1'>
@@ -130,11 +110,12 @@ export const EditNote = (note) =>{
                             </div>
                             <span>
                                 <i className="bi bi-plus-circle-fill" onClick={() =>{
-                                    updateNote(title,content,priority,label,color,editNoteForm.note._id)
+                                    updateNote(content,priority,label,color)
+                                    // setOpen('none')
                                 }}></i>
                             </span>
                             <span>
-                                <i className="bi bi-trash-fill" onClick={() => setEditNoteForm({display:"none",note:""})}></i>
+                                <i className="bi bi-trash-fill" onClick={() => {}}></i>
                             </span>
                             {/* {open ? 
                                 <>

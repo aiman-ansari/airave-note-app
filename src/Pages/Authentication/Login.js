@@ -4,8 +4,9 @@ import { useAuth } from "../../Context/AuthContext"
 import { Link } from "react-router-dom";
 export default function Login(){
 
-    const {handleLoginData} = useAuth();
+    const {handleLoginData, match} = useAuth();
 
+    console.log(match.password)
     const [login, setLogin] = useState({
         email:'',
         password:''
@@ -19,13 +20,23 @@ export default function Login(){
     const loginHandler = (e) =>{
         const {email, password} = login
         e.preventDefault();
-        if(email!== '' && password!==''){
-            handleLoginData(email,password)
+        if( email !== '' && password!=='')
+        {
+            if(email===match.email){
+                if(password===match.password){
+                    handleLoginData(email,password)
+                    }
+                    else{
+                        setIsError("password is not same")
+                    }
+            }
+            else{
+                setIsError("Email is not registered")
+                }
         }
         else{
-            setIsError('Please fill all the field')
+            setIsError('please fill all the filed')
         }
-        setIsError('')
     }
     const test =  {
         email: "adarshbalika@gmail.com",
@@ -58,9 +69,7 @@ export default function Login(){
                         onChange={handleData}
                     />
                 </div>
-               {isError == '' ? <></> :
-               <div className="alert alert-danger h6">{isError}</div>
-                } 
+                {isError == '' ? <></> : <div className="alert alert-danger h6">{isError}</div>}
             <div class="gap-2 flex-align-center">
                 <div class="h6">
                     <input 

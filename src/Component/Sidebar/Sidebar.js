@@ -1,8 +1,10 @@
 import React from 'react'
-import { Link, Navigate } from "react-router-dom"
-import { useAuth } from '../../../Context/AuthContext'
+import { Link } from "react-router-dom"
+import { useAuth } from '../../Context/AuthContext'
+import { useNote } from '../../Context/NoteContext';
 export const Sidebar = () =>{
-    const {setIsLogin} = useAuth()
+    const {setIsLogin} = useAuth();
+    const { setOpen} = useNote()
     return(
         <div>
             <ul>
@@ -21,6 +23,14 @@ export const Sidebar = () =>{
                     <i class="bi bi-archive mr-1"></i>Archive
                 </li>
                 </Link>
+                <li>
+                    <button className='btn btn-secondary' 
+                    onClick={() =>{
+                        setOpen('add')
+
+                    }}
+                    >Create new note</button>
+                </li>
                 <li>
                     <Link to="/">
                     Logout <i className="bi bi-box-arrow-in-right" onClick={() =>{
