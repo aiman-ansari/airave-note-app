@@ -10,11 +10,12 @@
 .note-container {
   display: flex;
   flex-direction: row;
+  gap: 1rem;
   justify-content: flex-start;
 }
 .single-note-container {
   background-color: var(--bg-note);
-  width: 20rem;
+  width: 30rem;
   height: max-content;
   padding: 1rem;
   margin-top: 3rem;

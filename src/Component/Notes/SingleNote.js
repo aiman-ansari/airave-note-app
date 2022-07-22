@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNote } from "../../Context/NoteContext";
 import { EditNote } from "./Edit";
 
@@ -10,8 +10,9 @@ export const SingleNote = ({ item }) => {
     setOpen,
     labels,
     setLabels,
+    openContainer,
+    setOpenContainer,
   } = useNote();
-
   const handleDelete = (item) => {
     setLabels(labels.filter((i) => !item.label.includes(i)));
 
@@ -46,8 +47,14 @@ export const SingleNote = ({ item }) => {
           </div>
         </div>
         <div className='note-icons'>
-          <i class='bi bi-pencil-square' onClick={() => setOpen("edit")}></i>
-          {open === "edit" ? <EditNote item={item} /> : <></>}
+          <i
+            class='bi bi-pencil-square'
+            onClick={() => {
+              setOpen("edit");
+              setOpenContainer(item._id);
+            }}
+          ></i>
+
           <span>
             <i
               className='bi bi-trash-fill'
@@ -61,6 +68,11 @@ export const SingleNote = ({ item }) => {
             ></i>
           </span>
         </div>
+        {open === "edit" && openContainer === item._id ? (
+          <EditNote item={item} />
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

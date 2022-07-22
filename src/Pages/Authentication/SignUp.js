@@ -1,126 +1,88 @@
-import React from 'react'
-import { useState } from "react"
-import { useAuth } from "../../Context/AuthContext"
-import { Link } from "react-router-dom"
-export default function SignUp(){
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
+import { useAuth } from "../../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import "./Auth.css";
 
-    const { handleSingupData} = useAuth()
-    const [isError, setIsError] = useState('')
-    const [message, showMessage] = useState('')
-    const [newUser, setNewUser] = useState({
-        email:'',
-        password:'',
-        firstName:'',
-        lastName:''
-    })
+export const SignUp = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleSingupData } = useAuth();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    if (firstName && lastName && email && password) {
+      if (password.length >= 8) {
+        handleSingupData(firstName, lastName, email, password);
+      } else {
+        setError("password should be greater than 8 characters");
+      }
+    } else {
+      setError("Please fill all the fields");
+    }
+  };
 
-    let value
-    const handleData = (e) =>{
-        value = e.target.value
-        setNewUser({...newUser, [e.target.name] : value})
-    }
-    const handleSingup = (e) =>{
-        const {firstName, lastName, email, password } = newUser
-        e.preventDefault();
-        if(firstName !== '' && lastName !== '' && email !== '' && password!=='')
-        {
-            if(password.length > 6){
-                    handleSingupData(firstName,lastName,email,password)
-                    showMessage("Account register successfully!!")
-                }
-            else{
-            setIsError("password should be greater than 6 character")
-            }
-        }
-        else{
-            setIsError('please fill all the filed')
-        }
-    }
-    return(
-        <div>
-            <div className="flex-align-center mt-4 text-success">{message}</div>
-                <div class="flex-align-center m-5">
-                    <div class="form box-shadow pd-2 ">
-                        <h3 class="mt-1 mb-2 flex-align-center">SignUp</h3>
-                            <form class="form" onSubmit={handleSingup}>
-                                <div class="input-with-icons">
-                                    <i class="bi bi-person-fill input-icon"></i>
-                                    <input 
-                                        type="Text" 
-                                        placeholder="Enter your first name"
-                                        class="icon-input"
-                                        name="firstName"
-                                        value={newUser.firstName}
-                                        onChange={handleData}
-                                    />
-                                </div>
-                                <div class="input-with-icons">
-                                    <i class="bi bi-person-fill input-icon"></i>
-                                    <input 
-                                        type="text" 
-                                        placeholder="Enter your last name"
-                                        class="icon-input"
-                                        name="lastName"
-                                        value={newUser.lastName}
-                                        onChange={handleData}
-                                    />
-                                    
-                                </div>
-                                <div class="input-with-icons">
-                                    <i class="bi bi-envelope-fill input-icon"></i>
-                                    <input 
-                                        type="email" 
-                                        placeholder="Enter your Email"
-                                        class="icon-input"
-                                        name="email"
-                                        value={newUser.email}
-                                        onChange={handleData}
-                                    />
-                                    
-                                </div>
-                                <div class="input-with-icons">
-                                    <i class="fa fa-lock input-icon"></i>
-                                    <input type="password"
-                                        placeholder="Enter your Password"
-                                        class="icon-input"
-                                        name="password"
-                                        value={newUser.password}
-                                        onChange={handleData}
-                                    />
-                                </div>
-                                {isError == '' ? 
-                                    <></> : 
-                                    <div className="alert alert-danger h6">{isError}</div>
-                                }
-                        
-                            <div class="gap-2 flex-align-center">
-                                <div class="h6">
-                                    <input 
-                                    type="checkbox" 
-                                    id="checkbox"
-                                    ischecked = "checked"
-                                />                    
-                                    <span class="pd--5">
-                                        Remember me
-                                    </span>
-                                </div>
-                                <button class="btn-link-primary h6">Forgot your password?</button>
-                            </div>
-                            <div className="flex-col gap-1">
-                                <div class="mt-1">
-                                    <button class="btn btn-gradient-blue width-100" type="submit">
-                                        SignUp
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex-align-center">
-                                <Link to="/login">
-                                    <button class="btn-link-gray m-1">Already have an account?</button>
-                                </Link>
-                            </div>
-                        </form> 
-                    </div>
-            </div>
+  return (
+    <div className='auth-container'>
+      <div class='form'>
+        <span className='bold-text'>Sign up</span>
+        <div class='input-with-icons '>
+          <i class='bi bi-person-fill input-icon'></i>
+          <input
+            type='text'
+            placeholder='Enter your First Name'
+            class='icon-input'
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
         </div>
-    )
-}
+        <div class='input-with-icons '>
+          <i class='bi bi-person-fill input-icon'></i>
+          <input
+            type='text'
+            placeholder='Enter your last Name'
+            class='icon-input'
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div class='input-with-icons '>
+          <i class='bi bi-envelope-fill input-icon'></i>
+          <input
+            type='email'
+            placeholder='Enter your Email'
+            class='icon-input'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div class='input-with-icons '>
+          <i class='bi bi-lock-fill input-icon'></i>
+          <input
+            type='password'
+            placeholder='Enter your Password'
+            class='icon-input'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className='text-danger mb-1'>{error}</div>
+        <div class='btn-container'>
+          <button
+            class='btn btn-primary  width-100'
+            onClick={() => handleSubmit()}
+          >
+            Signup
+          </button>
+          <div class='link-primary' onClick={() => navigate("/login")}>
+            Already have an account ?
+          </div>
+        </div>
+      </div>
+      <ToastContainer />
+    </div>
+  );
+};

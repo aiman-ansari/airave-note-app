@@ -20,9 +20,12 @@ const initialTrahState = {
   trashNote: [],
 };
 const NoteProvider = ({ children }) => {
+  const [openContainer, setOpenContainer] = useState();
+
   const [note, setNote] = useState(initialNoteState);
   const [trash, setTrash] = useState(initialTrahState);
   const [open, setOpen] = useState("none");
+  const [Editopen, setEditOpen] = useState("none");
   const [archive, setArchive] = useState([]);
   const [labels, setLabels] = useState([]);
 
@@ -129,6 +132,7 @@ const NoteProvider = ({ children }) => {
         }
       );
       setNote(res.data.notes);
+      console.log("updated", res.data.notes);
     } catch (err) {
       console.log(err);
     }
@@ -225,7 +229,11 @@ const NoteProvider = ({ children }) => {
         setLabels,
         trash,
         restoreNote,
+        openContainer,
+        setOpenContainer,
         deleteNote,
+        Editopen,
+        setEditOpen,
       }}
     >
       {children}

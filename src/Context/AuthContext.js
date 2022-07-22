@@ -1,61 +1,92 @@
-import React from 'react'
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { authReducer } from "../Reducer/authReducer";
 
+const AuthContext = createContext();
 
-const AuthContext = createContext()
+const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const [state, dispatch] = useReducer(authReducer, {
+    isAuthenticated: localStorage.getItem("token") ? true : false,
+    token: localStorage.getItem("token") ? localStorage.getItem("token") : null,
+    user: localStorage.getItem("user") ? localStorage.getItem("user") : null,
+  });
 
-const AuthProvider = ({children}) =>{
-    const navigate = useNavigate()
-    const [match, setMatch] = useState([])
-    const [isLogin, setIsLogin] = useState(false);
-     const user =  localStorage.getItem('user')
-    const token = localStorage.getItem('token')
-   
-    
-    const handleSingupData = async(firstName, lastName, email, password) =>{
-        const getValues =  { email, password, firstName, lastName} 
-        try {
-
-            const res = await axios.post('/api/auth/signup', getValues);
-            if(res.status== 200 || res.status== 201){
-                 setIsLogin(true)
-                 localStorage.setItem("token", res.data.encodedToken)
-                 setMatch(res.data.createdUser)
-                 navigate('/login')
-            }
-          }
-           catch (error) {
-            if (error.response.status == 422) {
-              alert("account already exist please login");
-            }
-            
-        }
+  const handleSingupData = async (firstName, lastName, email, password) => {
+    const getValues = { firstName, lastName, email, password };
+    try {
+      const res = await axios.post("/api/auth/signup", getValues);
+      if (res.status === 200 || res.status == 201) {
+        localStorage.setItem("token", res.data.encodedToken);
+        dispatch({
+          type: "signup",
+          payload: res.data,
+        });
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
+      }
+    } catch (error) {
+      if (error.response.status === 422) {
+        toast.error("Account already exist , please login", {
+          theme: "colored",
+          autoClose: 2000,
+        });
+      }
     }
+  };
 
-    const handleLoginData = async(email, password) =>{
-        const getLoginValues =  { email, password} 
-        try {
-                const res = await axios.post('/api/auth/login',getLoginValues);
-                        if(res.status== 200 || res.status== 201){
-                            setIsLogin(true)
-                            localStorage.setItem("token", res.data.encodedToken);
-                            localStorage.setItem("user",res.data.foundUser.firstName);
-                            navigate('home')
-                        }
-                      } catch (error) {
-                          console.log(error)
+  const handleLoginData = async (email, password) => {
+    const getLoginValues = { email, password };
+
+    try {
+      const res = await axios.post("/api/auth/login", getLoginValues);
+      if (res.status === 200 || res.status === 201) {
+        localStorage.setItem("token", res.data.encodedToken);
+        localStorage.setItem(
+          "user",
+          res.data.foundUser.firstName + " " + res.data.foundUser.lastName
+        );
+        dispatch({
+          type: "login",
+          payload: res.data,
+        });
+        toast.success("Logged in successfully", {
+          theme: "colored",
+          autoClose: 2000,
+        });
+      }
+    } catch (error) {
+      if (error.response.status === 404) {
+        toast.error("Email is not register", {
+          theme: "colored",
+          autoClose: 2000,
+        });
+      }
+      if (error.response.status === 401) {
+        toast.error("Password does not match", {
+          theme: "colored",
+          autoClose: 2000,
+        });
+      }
     }
-}
+  };
 
+  return (
+    <AuthContext.Provider
+      value={{
+        handleSingupData,
+        handleLoginData,
+        state,
+        dispatch,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+const useAuth = () => useContext(AuthContext);
 
-    return(
-        <AuthContext.Provider value={{isLogin, setIsLogin, handleSingupData, handleLoginData , match, user, token}}>
-            {children}
-        </AuthContext.Provider>
-    )
-}
-const useAuth =()=> useContext(AuthContext)
-
-export { useAuth, AuthProvider}
+export { useAuth, AuthProvider };
