@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
-import { useNote } from "../../Context/NoteContext";
+import { toast } from "react-toastify";
 import "./Sidebar.css";
 export const Sidebar = () => {
   const { setIsLogin } = useAuth();
@@ -36,6 +36,12 @@ export const Sidebar = () => {
               className='bi bi-box-arrow-in-right'
               onClick={() => {
                 setIsLogin(false);
+                setTimeout(() => {
+                  toast.info("Logging out", {
+                    theme: "colored",
+                    autoClose: 2000,
+                  });
+                }, 2000);
               }}
             ></i>
           </Link>

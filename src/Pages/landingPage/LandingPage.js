@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./LandingPage.css";
 export const LangingPage = () => {
   return (
@@ -29,6 +30,7 @@ export const LangingPage = () => {
           alt='hero-image'
         />
       </div>
+      <ToastContainer />
     </div>
   );
 };
