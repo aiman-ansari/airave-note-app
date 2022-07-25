@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
 import {
   Note,
   Filter,
@@ -62,6 +63,7 @@ export const HomePage = () => {
           </div>
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };

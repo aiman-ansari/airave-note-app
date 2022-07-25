@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import { FilterReducer } from "./../Reducer/FilterReducer";
+import { toast } from "react-toastify";
 const NoteContext = createContext();
 
 const useNote = () => useContext(NoteContext);
@@ -66,6 +67,10 @@ const NoteProvider = ({ children }) => {
         }
       );
       setNote(res.data.notes);
+      toast.success("Successfully Added", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -84,6 +89,10 @@ const NoteProvider = ({ children }) => {
         ...prev,
         trashNote: [...prev.trashNote, note],
       }));
+      toast.error("Added to trash", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -94,6 +103,10 @@ const NoteProvider = ({ children }) => {
     setTrash((prev) => ({
       trashNote: [...prev.trashNote.filter((item) => item !== note)],
     }));
+    toast.error(" Successfully Deleted note", {
+      theme: "colored",
+      autoClose: 2000,
+    });
   };
 
   //Restoring note to db
@@ -114,6 +127,10 @@ const NoteProvider = ({ children }) => {
       setTrash((prev) => ({
         trashNote: [...prev.trashNote.filter((item) => item !== note)],
       }));
+      toast.success("note is being restore", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -132,6 +149,10 @@ const NoteProvider = ({ children }) => {
         }
       );
       setNote(res.data.notes);
+      toast.info("note is successfully updated", {
+        theme: "colored",
+        autoClose: 2000,
+      });
       console.log("updated", res.data.notes);
     } catch (err) {
       console.log(err);
@@ -167,6 +188,10 @@ const NoteProvider = ({ children }) => {
       );
       setArchive(res.data.archives);
       setNote(res.data.notes);
+      toast.success("Added to archive", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -181,6 +206,14 @@ const NoteProvider = ({ children }) => {
         },
       });
       setArchive(res.data.archives);
+      setTrash((prev) => ({
+        ...prev,
+        trashNote: [...prev.trashNote, note],
+      }));
+      toast.success("Added to trash", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -199,6 +232,10 @@ const NoteProvider = ({ children }) => {
 
       setArchive(response.data.archives);
       setNote(response.data.notes);
+      toast.success("Note is successfully restore", {
+        theme: "colored",
+        autoClose: 2000,
+      });
     } catch (err) {
       console.log(err);
     }

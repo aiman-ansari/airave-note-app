@@ -4,6 +4,7 @@ import { Note } from "../../Component";
 import { Sidebar } from "../../Component";
 import "./Archive.css";
 import "./../HomePage/HomePage.css";
+import { ToastContainer } from "react-toastify";
 export const ArchivePage = () => {
   const { archive, restoreArchive, deleteArchive, open, setOpen } = useNote();
 
@@ -71,6 +72,7 @@ export const ArchivePage = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

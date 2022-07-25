@@ -20,7 +20,6 @@ export default function Login() {
     if (email && password) {
       setError(false);
       handleLoginData(email, password);
-      navigate("/home");
     } else {
       setError(true);
       setMessage("Please fill all the fields");

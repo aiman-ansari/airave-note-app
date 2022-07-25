@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 2rem;
 }
 .form span {
   font-size: 2rem;
@@ -31,12 +32,15 @@
 }
 .btn-container .btn:hover {
   background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
 }
 .btn-container .btn-outline-primary {
   background-color: transparent;
 }
 .btn-container .btn-outline-primary:hover {
   background-color: var(--primary-color);
+  color: white;
 }
 .link-primary {
   color: var(--text-white);

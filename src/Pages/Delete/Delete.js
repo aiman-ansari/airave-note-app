@@ -2,6 +2,7 @@ import React from "react";
 import { useNote } from "../../Context/NoteContext";
 import { Sidebar, SingleNote } from "../../Component";
 import "../HomePage/HomePage.css";
+import { ToastContainer } from "react-toastify";
 export const DeletePage = () => {
   const {
     archive,
@@ -78,6 +79,7 @@ export const DeletePage = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
