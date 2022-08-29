@@ -26,8 +26,7 @@ export default function Login() {
     }
   };
   const handleTest = () => {
-    setEmail(test.email);
-    setPassword(test.password);
+    handleLoginData(test.email, test.password);
   };
   return (
     <div className='auth-container'>

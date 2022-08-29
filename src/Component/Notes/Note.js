@@ -4,6 +4,7 @@ import { useNote } from "../../Context/NoteContext";
 import { Label } from "../Label/Label";
 import { Color } from "../Color/Color";
 import "./Note.css";
+import { toast } from "react-toastify";
 export const Note = () => {
   const { addNote, setOpen, open, labels } = useNote();
   const [title, setTitle] = useState();
@@ -13,16 +14,21 @@ export const Note = () => {
   const [label, setLabel] = useState([]);
 
   const addNotes = () => {
-    if (!labels.includes(label)) {
-      setLabel((labels) => [...labels, label]);
+    if (title && content) {
+      if (!labels.includes(label)) {
+        setLabel((labels) => [...labels, label]);
+
+        addNote({ title, content, priority, color, label, date, time });
+        setTitle("");
+        setContent("");
+        setColor("color");
+        setPriority("low");
+        setLabel("");
+        setOpen("none");
+      }
+    } else {
+      toast.error("fill all");
     }
-    addNote({ title, content, priority, color, label, date, time });
-    setTitle("");
-    setContent("");
-    setColor("color");
-    setPriority("low");
-    setLabel("");
-    setOpen("none");
   };
   const handleLabel = (string) => {
     if (!string.includes(string)) {

@@ -19,7 +19,7 @@ export const HomePage = () => {
         <div className='add-note'>
           <div
             placeholder='Take a new Note'
-            class='search-input'
+            className='search-input'
             onClick={() => {
               setOpen("add");
             }}
